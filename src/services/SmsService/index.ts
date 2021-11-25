@@ -1,3 +1,3 @@
 export interface SmsService {
-    sendSms(phoneNumbers: Number[], monitoredServiceId: string);
+    sendSms(phoneNumbers: String[], monitoredServiceId: String);
 }

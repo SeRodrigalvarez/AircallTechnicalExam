@@ -4,5 +4,5 @@ export type EscalationPolicy = {
 }
 
 export interface EscalationPolicyService {
-    getEscalationPolicy(monitoredServiceId: String, escalationLevel: Number): EscalationPolicy;
+    getEscalationPolicy(monitoredServiceId: String, escalationLevel: number): EscalationPolicy;
 }

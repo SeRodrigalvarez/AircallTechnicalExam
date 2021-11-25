@@ -1,3 +1,3 @@
 export interface TimerService {
-    createTimer(monitoredServiceId: String, timeInSec: Number);
+    createTimer(monitoredServiceId: String, timeInSec: number);
 }

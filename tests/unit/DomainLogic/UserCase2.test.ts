@@ -61,13 +61,13 @@ describe(
         domainLogic.processTimer('myservice');
 
         expect(escalationPolicyServiceMock.getEscalationPolicy).toHaveBeenNthCalledWith(1, 'myservice', 2);
-        expect(mailServiceMock.sendMail).toHaveBeenNthCalledWith(1, 'person2@mail.com', 'myservice');
+        expect(mailServiceMock.sendMail).toHaveBeenNthCalledWith(1, ['person2@mail.com'], 'myservice');
         expect(persistenceServiceMock.getLastPager).toHaveBeenNthCalledWith(1, 'myservice');
         expect(persistenceServiceMock.createPager).not.toHaveBeenCalled();
         expect(persistenceServiceMock.setPagerStatus).not.toHaveBeenCalled();
         expect(persistenceServiceMock.setPagerAcknowledgement).not.toHaveBeenCalled();
         expect(persistenceServiceMock.escalatePager).toHaveBeenNthCalledWith(1, 'myservice');
-        expect(smsServiceMock.sendSms).toHaveBeenNthCalledWith(1, '234567891', 'myservice');
+        expect(smsServiceMock.sendSms).toHaveBeenNthCalledWith(1, ['234567891'], 'myservice');
         expect(timerServiceMock.createTimer).toHaveBeenNthCalledWith(1, 'myservice', 900);
     })
 })
