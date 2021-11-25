@@ -1,5 +1,5 @@
 export type EscalationPolicy = {
-    smsTargets: Number[];
+    smsTargets: String[];
     mailTargets: String[];
 }
 
