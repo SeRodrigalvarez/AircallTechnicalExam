@@ -16,10 +16,9 @@ class DomainLogic {
     ) {}
 
     public processAlert(monitoredServiceId: String, alertMessage: String) {
-        const pager: Pager = this.persistenceService.getLastPager(monitoredServiceId);
+        const pager: Pager = this.persistenceService.getOrCreateLastPager(monitoredServiceId, alertMessage);
         
-        if (pager.isHealthy) {
-            this.persistenceService.createPager(monitoredServiceId, alertMessage);
+        if (pager.isNew) {
             const escalationPolicy: EscalationPolicy = this.escalationPolicy.getEscalationPolicy(monitoredServiceId, 1);
             this.mailService.sendMail(escalationPolicy.mailTargets, monitoredServiceId);
             this.smsService.sendSms(escalationPolicy.smsTargets, monitoredServiceId);

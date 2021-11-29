@@ -32,7 +32,7 @@ describe(
                 isHealthy: false,
                 isAcknowledged: true,
             }),
-            createPager: jest.fn(),
+            getOrCreateLastPager: jest.fn(),
             setPagerStatus: jest.fn(),
             setPagerAcknowledgement: jest.fn(),
             escalatePager: jest.fn(),
@@ -58,7 +58,7 @@ describe(
         expect(escalationPolicyServiceMock.getEscalationPolicy).not.toHaveBeenCalled();
         expect(mailServiceMock.sendMail).not.toHaveBeenCalled();
         expect(persistenceServiceMock.getLastPager).toHaveBeenNthCalledWith(1, 'myservice');
-        expect(persistenceServiceMock.createPager).not.toHaveBeenCalled();
+        expect(persistenceServiceMock.getOrCreateLastPager).not.toHaveBeenCalled();
         expect(persistenceServiceMock.setPagerStatus).not.toHaveBeenCalled();
         expect(persistenceServiceMock.setPagerAcknowledgement).toHaveBeenNthCalledWith(1, 'myservice', true);
         expect(persistenceServiceMock.escalatePager).not.toHaveBeenCalled();

@@ -29,13 +29,13 @@ describe(
         }
         
         persistenceServiceMock = {
-            getLastPager: jest.fn()
-            .mockReturnValue({
+            getLastPager: jest.fn(),
+            getOrCreateLastPager: jest.fn().mockReturnValue({
                 currentLevel: 1,
                 isHealthy: true,
                 isAcknowledged: true,
+                isNew: true,
             }),
-            createPager: jest.fn(),
             setPagerStatus: jest.fn(),
             setPagerAcknowledgement: jest.fn(),
             escalatePager: jest.fn(),
@@ -60,8 +60,8 @@ describe(
 
         expect(escalationPolicyServiceMock.getEscalationPolicy).toHaveBeenNthCalledWith(1, 'myservice', 1);
         expect(mailServiceMock.sendMail).toHaveBeenNthCalledWith(1, ['person@mail.com'], 'myservice');
-        expect(persistenceServiceMock.getLastPager).toHaveBeenNthCalledWith(1, 'myservice');
-        expect(persistenceServiceMock.createPager).toHaveBeenNthCalledWith(1, 'myservice', 'it stopped working');
+        expect(persistenceServiceMock.getLastPager).not.toHaveBeenCalled();
+        expect(persistenceServiceMock.getOrCreateLastPager).toHaveBeenNthCalledWith(1, 'myservice', 'it stopped working');
         expect(persistenceServiceMock.setPagerStatus).not.toHaveBeenCalled();
         expect(persistenceServiceMock.setPagerAcknowledgement).not.toHaveBeenCalled();
         expect(persistenceServiceMock.escalatePager).not.toHaveBeenCalled();
